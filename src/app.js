@@ -42,7 +42,7 @@ app.configure(socketio(io => {
       app.service('cpu').find().then((data)=>{
         io.emit('cpu_load', data);
       })
-    }, 1000);
+    }, 3000);
 
   })
 }));
