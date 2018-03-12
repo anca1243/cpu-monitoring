@@ -18,9 +18,11 @@ class CpuLoad extends Component {
     const div = new ReactFauxDOM.createElement('div');
 
     // set the dimensions and margins of the graph
-    var margin = {top: 20, right: 20, bottom: 30, left: 50},
-        width = 960 - margin.left - margin.right,
-        height = 500 - margin.top - margin.bottom;
+    console.log(window.innerWidth, window.innerHeight);
+
+    var margin = {top: 20, right: 80, bottom: 50, left: 50},
+        width = window.innerWidth - margin.left - margin.right,
+        height = window.innerHeight - margin.top - margin.bottom;
 
     // parse the date / time
 
