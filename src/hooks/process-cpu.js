@@ -29,7 +29,7 @@ module.exports = function (options = {}) {
     lastCPUInfo.idle = currentCPUInfo.idle;
     lastCPUInfo.total = currentCPUInfo.total;
     context.result={};
-    return readFile('/proc/stat', 'utf8',).then(data =>  {
+    return readFile('/proc/stat', 'utf8').then(data =>  {
       var lines = data.split('\n');
       var cpuTimes = lines[0].match(/[0-9]+/gi);
       currentCPUInfo.total = 0;
