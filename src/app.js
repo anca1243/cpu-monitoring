@@ -15,6 +15,7 @@ const middleware = require('./middleware');
 const services = require('./services');
 const appHooks = require('./app.hooks');
 const channels = require('./channels');
+const os = require("os");
 
 const app = express(feathers());
 
@@ -38,6 +39,7 @@ app.configure(middleware);
 app.configure(services);
 app.configure(socketio(io => {
   io.on('connection', socket => {
+    io.emit('hostname', os.hostname())
     setInterval(function(){
       app.service('cpu').find().then((data)=>{
         io.emit('cpu_load', data);

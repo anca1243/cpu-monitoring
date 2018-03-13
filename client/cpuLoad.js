@@ -14,7 +14,7 @@ class CpuLoad extends Component {
 
   drawChart(){
 
-    const {data} = this.props
+    const {data, hostname} = this.props
     const div = new ReactFauxDOM.createElement('div');
 
     // set the dimensions and margins of the graph
@@ -49,6 +49,13 @@ class CpuLoad extends Component {
         .attr("transform",
               "translate(" + margin.left + "," + margin.top + ")");
 
+    svg.append("text")
+            .attr("x", (width / 2))
+            .attr("y", 0 - (margin.top / 2))
+            .attr("text-anchor", "middle")
+            .style("font-size", "16px")
+            .style("text-decoration", "underline")
+            .text(hostname);
       // Scale the range of the data
       let max =d3.max(data, function(d) { return d.x; });
       x.domain(d3.extent(data, function(d) { return d.x; }));

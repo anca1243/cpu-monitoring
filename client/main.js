@@ -15,7 +15,7 @@ class Main extends Component {
     super(props);
     this.state = {
       data: [],
-      memoryData: [],
+      hostname: "",
       x: 0,
     }
   }
@@ -27,18 +27,17 @@ class Main extends Component {
       t.state.data.push({mem: data.memory.percentUsed, y: data.cpu.percentUsed, x: t.state.x})
       if (t.state.data.length > 50)
         t.state.data.shift();
-      if (t.state.memoryData.length > 50)
-        t.state.memoryData.shift();
 
       t.setState({data: t.state.data})
       t.setState({x: t.state.x+1})
 
     })
-    app.io.on('connect', () => {console.log("connected")})
+    app.io.on('hostname', (hostname) => t.setState({hostname: hostname}));
+    app.io.on('connect', () => {console.log("connected")});
   }
 
   render() {
-    return <CpuLoad data={this.state.data}/>;
+    return <CpuLoad data={this.state.data} hostname={this.state.hostname}/>;
   }
 }
 
