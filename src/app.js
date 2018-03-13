@@ -23,7 +23,7 @@ const app = express(feathers());
 app.configure(configuration());
 // Enable CORS, security, compression, favicon and body parsing
 app.use(cors());
-app.use(helmet());
+// app.use(helmet());
 app.use(compress());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
