@@ -1,16 +1,13 @@
 // Initializes the `cpu` service on path `/cpu`
-const createService = require('feathers-nedb');
-const createModel = require('../../models/cpu.model');
+const createService = require('./cpu.class.js');
 const hooks = require('./cpu.hooks');
-const socketio = require('@feathersjs/socketio');
 
 module.exports = function (app) {
-  const Model = createModel(app);
+  
   const paginate = app.get('paginate');
 
   const options = {
     name: 'cpu',
-    Model,
     paginate
   };
 

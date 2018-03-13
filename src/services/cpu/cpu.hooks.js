@@ -1,9 +1,8 @@
-const processCpu = require('../../hooks/process-cpu.js');
 
 
 module.exports = {
   before: {
-    all: [processCpu()],
+    all: [],
     find: [],
     get: [],
     create: [],
@@ -13,7 +12,7 @@ module.exports = {
   },
 
   after: {
-    all: [processCpu()],
+    all: [],
     find: [],
     get: [],
     create: [],
@@ -23,7 +22,7 @@ module.exports = {
   },
 
   error: {
-    all: [processCpu()],
+    all: [],
     find: [],
     get: [],
     create: [],

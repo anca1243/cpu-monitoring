@@ -4,7 +4,7 @@ import feathers from '@feathersjs/feathers';
 import socketio from '@feathersjs/socketio-client';
 import io from 'socket.io-client';
 
-const socket = io('http://localhost:3030/');
+const socket = io(location.host);
 const app = feathers();
 
 
@@ -15,6 +15,7 @@ class Main extends Component {
     super(props);
     this.state = {
       data: [],
+      memoryData: [],
       x: 0,
     }
   }
@@ -23,10 +24,12 @@ class Main extends Component {
     app.configure(socketio(socket));
     let t = this;
     app.io.on('cpu_load',function(data){
-      console.log(data.cpu)
-      t.state.data.push({y: data.cpu.percentUsed, x: t.state.x})
+      t.state.data.push({mem: data.memory.percentUsed, y: data.cpu.percentUsed, x: t.state.x})
       if (t.state.data.length > 50)
         t.state.data.shift();
+      if (t.state.memoryData.length > 50)
+        t.state.memoryData.shift();
+
       t.setState({data: t.state.data})
       t.setState({x: t.state.x+1})
 
@@ -35,7 +38,7 @@ class Main extends Component {
   }
 
   render() {
-    return <CpuLoad data={this.state.data} />;
+    return <CpuLoad data={this.state.data}/>;
   }
 }
 
